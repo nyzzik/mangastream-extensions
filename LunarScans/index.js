@@ -16555,6 +16555,10 @@ var source = (() => {
       this.domain = domain;
     }
     async interceptRequest(request) {
+      console.log("--------------------------");
+      console.log("Cookies ");
+      console.log(request.cookies);
+      console.log("--------------------------");
       request.headers = {
         ...request.headers ?? {},
         ...{
@@ -17080,17 +17084,46 @@ var source = (() => {
     async initialise() {
       this.globalRateLimiter.registerInterceptor();
       this.cookieStorageInterceptor.registerInterceptor();
+      this.requestManager?.registerInterceptor();
       if (Application.isResourceLimited) return;
+      try {
+        for (const tags of await this.getSearchTags()) {
+          Application.registerSearchFilter({
+            type: "multiselect",
+            options: tags.tags.map((x) => ({ id: x.id, value: x.title })),
+            id: tags.id,
+            allowExclusion: false,
+            title: tags.title,
+            value: {},
+            allowEmptySelection: true,
+            maximum: void 0
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
       console.log("h");
     }
+    async getSearchTags() {
+      let tags = Application.getState("tags");
+      if (tags) {
+        return tags;
+      }
+      const request = {
+        url: `${this.domain}/${this.directoryPath}/`,
+        method: "GET"
+      };
+      const [response, buffer] = await Application.scheduleRequest(request);
+      this.checkResponseError(request, response);
+      const $2 = load(Application.arrayBufferToUTF8String(buffer));
+      tags = this.parser.parseTags($2);
+      for (const tag of tags[0].tags) {
+        console.log(tag.id);
+      }
+      Application.setState(tags, "tags");
+      return tags;
+    }
     async getSearchResults(query, metadata) {
-      console.log("Count: " + this.count);
-      console.log(
-        "Cookie Count: " + this.cookieStorageInterceptor.cookies.length
-      );
-      this.cookieStorageInterceptor.cookies.forEach((cookie) => {
-        console.log("Cookie: " + cookie.name);
-      });
       const page = metadata?.page ?? 1;
       let urlBuilder = new URLBuilder(this.domain).addPath(this.directoryPath).addQuery("page", page.toString());
       if (query?.title) {
@@ -17100,42 +17133,23 @@ var source = (() => {
         );
       } else {
         const includedTags = [];
-        const excludedTags = [];
         for (const filter4 of query.filters) {
-          if (filter4.id.startsWith("tags")) {
-            const tags = filter4.value ?? {};
-            for (const tag of Object.entries(tags)) {
-              switch (tag[1]) {
-                case "excluded":
-                  excludedTags.push(tag[0]);
-                  break;
-                case "included":
-                  includedTags.push(tag[0]);
-                  break;
-              }
-            }
+          const tags = filter4.value ?? {};
+          for (const tag of Object.entries(tags)) {
+            includedTags.push(tag[0]);
           }
         }
-        urlBuilder = urlBuilder.addQuery("genre", getFilterTagsBySection("genres", includedTags, true)).addQuery(
-          "genre",
-          getFilterTagsBySection(
-            "genres",
-            excludedTags,
-            false,
-            this.supportsTagExclusion()
-          )
-        ).addQuery("status", getIncludedTagBySection("status", includedTags)).addQuery("type", getIncludedTagBySection("type", includedTags)).addQuery("order", getIncludedTagBySection("order", includedTags));
+        console.log(includedTags.length);
+        console.log(includedTags.toString());
+        urlBuilder = urlBuilder.addQuery("genre", getFilterTagsBySection("genres", includedTags, true)).addQuery("status", getIncludedTagBySection("status", includedTags)).addQuery("type", getIncludedTagBySection("type", includedTags)).addQuery("order", getIncludedTagBySection("order", includedTags));
       }
       const request = {
         url: urlBuilder.build(),
         method: "GET"
       };
       const [response, buffer] = await Application.scheduleRequest(request);
-      this.checkResponseError(response);
-      console.log(response.status);
+      this.checkResponseError(request, response);
       const $2 = load(Application.arrayBufferToUTF8String(buffer));
-      console.log("Cheerio Title:", $2("title").text());
-      console.log($2().html());
       const results = this.parser.parseSearchResults($2);
       const manga = [];
       for (const result of results) {
@@ -17165,7 +17179,7 @@ var source = (() => {
         method: "GET"
       };
       const [response, buffer] = await Application.scheduleRequest(request);
-      this.checkResponseError(response);
+      this.checkResponseError(request, response);
       const $2 = load(Application.arrayBufferToUTF8String(buffer));
       return this.parser.parseMangaDetails($2, mangaId, this);
     }
@@ -17176,7 +17190,7 @@ var source = (() => {
         method: "GET"
       };
       const [response, buffer] = await Application.scheduleRequest(request);
-      this.checkResponseError(response);
+      this.checkResponseError(request, response);
       const $2 = load(Application.arrayBufferToUTF8String(buffer));
       return this.parser.parseChapterList($2, sourceManga, this);
     }
@@ -17186,7 +17200,7 @@ var source = (() => {
         method: "GET"
       };
       const [response, buffer] = await Application.scheduleRequest(request);
-      this.checkResponseError(response);
+      this.checkResponseError(request, response);
       const $2 = load(Application.arrayBufferToUTF8String(buffer));
       const chapters = $2("div#chapterlist").find("li").toArray();
       if (chapters.length === 0) {
@@ -17213,7 +17227,7 @@ var source = (() => {
         method: "GET"
       };
       const [_response, _buffer] = await Application.scheduleRequest(_request);
-      this.checkResponseError(_response);
+      this.checkResponseError(_request, _response);
       const _$ = load(Application.arrayBufferToUTF8String(_buffer));
       return this.parser.parseChapterDetails(_$, chap);
     }
@@ -17228,7 +17242,7 @@ var source = (() => {
         method: "GET"
       };
       const [response, buffer] = await Application.scheduleRequest(request);
-      this.checkResponseError(response);
+      this.checkResponseError(request, response);
       const $2 = load(Application.arrayBufferToUTF8String(buffer));
       let s;
       switch (section.id) {
@@ -17249,20 +17263,21 @@ var source = (() => {
     async saveCloudflareBypassCookies(cookies) {
       this.count += 1;
       for (const cookie of cookies) {
+        if (cookie.expires && cookie.expires.getUTCMilliseconds() <= Date.now()) {
+          continue;
+        }
         if (cookie.name.startsWith("cf") || cookie.name.startsWith("_cf") || cookie.name.startsWith("__cf")) {
           console.log("saving cloudflare cookie " + cookie.name);
+          console.log(cookie.expires);
           this.cookieStorageInterceptor.setCookie(cookie);
         }
       }
     }
-    checkResponseError(response) {
+    checkResponseError(request, response) {
       switch (response.status) {
         case 403:
         case 503:
-          throw new import_types4.CloudflareError(
-            { url: this.domain, method: "GET" },
-            "Error Code: " + response.status
-          );
+          throw new import_types4.CloudflareError(request, "Error Code: " + response.status);
         case 404:
           throw new Error(`The requested page ${response.url} was not found!`);
       }
@@ -17312,7 +17327,7 @@ var source = (() => {
         method: "HEAD"
       };
       const [headResponse, __] = await Application.scheduleRequest(headRequest);
-      this.checkResponseError(headResponse);
+      this.checkResponseError(headRequest, headResponse);
       let postId;
       const postIdRegex = headResponse?.headers.Link?.match(/\?p=(\d+)/);
       if (postIdRegex?.[1]) {
