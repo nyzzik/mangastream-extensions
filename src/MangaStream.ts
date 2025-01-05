@@ -24,6 +24,7 @@ import {
   SearchResultsProviding,
   SettingsFormProviding,
   SourceManga,
+  TagSection,
 } from "@paperback/types";
 import * as cheerio from "cheerio";
 import { AnyNode } from "domhandler";
@@ -158,23 +159,62 @@ export abstract class MangaStreamGeneric
   async initialise(): Promise<void> {
     // throw new Error("Method not implemented.");
     this.globalRateLimiter.registerInterceptor();
-    // this.requestManager?.registerInterceptor();
     this.cookieStorageInterceptor.registerInterceptor();
+    this.requestManager?.registerInterceptor();
     if (Application.isResourceLimited) return;
+
+    try {
+      for (const tags of await this.getSearchTags()) {
+        Application.registerSearchFilter({
+          type: "multiselect",
+          options: tags.tags.map((x) => ({ id: x.id, value: x.title })),
+          id: tags.id,
+          allowExclusion: false,
+          title: tags.title,
+          value: {},
+          allowEmptySelection: true,
+          maximum: undefined,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
 
     console.log("h");
   }
+
+  async getSearchTags(): Promise<TagSection[]> {
+    let tags: TagSection[] = Application.getState("tags") as TagSection[];
+    if (tags) {
+      return tags;
+    }
+    const request = {
+      url: `${this.domain}/${this.directoryPath}/`,
+      method: "GET",
+    };
+
+    const [response, buffer] = await Application.scheduleRequest(request);
+    this.checkResponseError(request, response);
+    const $ = cheerio.load(Application.arrayBufferToUTF8String(buffer));
+    tags = this.parser.parseTags($);
+    for (const tag of tags[0].tags) {
+      console.log(tag.id);
+    }
+    Application.setState(tags, "tags");
+    return tags;
+  }
+
   async getSearchResults(
     query: SearchQuery,
     metadata: MangaStreamSearchMetadata | undefined,
   ): Promise<PagedResults<SearchResultItem>> {
-    console.log("Count: " + this.count);
-    console.log(
-      "Cookie Count: " + this.cookieStorageInterceptor.cookies.length,
-    );
-    this.cookieStorageInterceptor.cookies.forEach((cookie) => {
-      console.log("Cookie: " + cookie.name);
-    });
+    // console.log("Count: " + this.count);
+    // console.log(
+    //   "Cookie Count: " + this.cookieStorageInterceptor.cookies.length,
+    // );
+    // this.cookieStorageInterceptor.cookies.forEach((cookie) => {
+    //   console.log("Cookie: " + cookie.name);
+    // });
     const page: number = metadata?.page ?? 1;
 
     let urlBuilder: URLBuilder = new URLBuilder(this.domain)
@@ -188,36 +228,19 @@ export abstract class MangaStreamGeneric
       );
     } else {
       const includedTags: string[] = [];
-      const excludedTags: string[] = [];
       for (const filter of query.filters) {
-        if (filter.id.startsWith("tags")) {
-          const tags = (filter.value ?? {}) as Record<
-            string,
-            "included" | "excluded"
-          >;
-          for (const tag of Object.entries(tags)) {
-            switch (tag[1]) {
-              case "excluded":
-                excludedTags.push(tag[0]);
-                break;
-              case "included":
-                includedTags.push(tag[0]);
-                break;
-            }
-          }
+        const tags = (filter.value ?? {}) as Record<
+          string,
+          "included" | "excluded"
+        >;
+        for (const tag of Object.entries(tags)) {
+          includedTags.push(tag[0]);
         }
       }
+      console.log(includedTags.length);
+      console.log(includedTags.toString());
       urlBuilder = urlBuilder
         .addQuery("genre", getFilterTagsBySection("genres", includedTags, true))
-        .addQuery(
-          "genre",
-          getFilterTagsBySection(
-            "genres",
-            excludedTags,
-            false,
-            this.supportsTagExclusion(),
-          ),
-        )
         .addQuery("status", getIncludedTagBySection("status", includedTags))
         .addQuery("type", getIncludedTagBySection("type", includedTags))
         .addQuery("order", getIncludedTagBySection("order", includedTags));
@@ -229,11 +252,11 @@ export abstract class MangaStreamGeneric
     };
     // const response = await this.requestManager.schedule(request, 1)
     const [response, buffer] = await Application.scheduleRequest(request);
-    this.checkResponseError(response);
-    console.log(response.status);
+    this.checkResponseError(request, response);
+    // console.log(response.status);
     const $ = cheerio.load(Application.arrayBufferToUTF8String(buffer));
-    console.log("Cheerio Title:", $("title").text());
-    console.log($().html());
+    // console.log("Cheerio Title:", $("title").text());
+    // console.log($().html());
     const results = this.parser.parseSearchResults($);
 
     const manga: SearchResultItem[] = [];
@@ -274,7 +297,7 @@ export abstract class MangaStreamGeneric
 
     // const response = await this.requestManager.schedule(request, 1)
     const [response, buffer] = await Application.scheduleRequest(request);
-    this.checkResponseError(response);
+    this.checkResponseError(request, response);
     const $ = cheerio.load(Application.arrayBufferToUTF8String(buffer));
 
     return this.parser.parseMangaDetails($, mangaId, this);
@@ -290,7 +313,7 @@ export abstract class MangaStreamGeneric
 
     // const response = await this.requestManager.schedule(request, 1)
     const [response, buffer] = await Application.scheduleRequest(request);
-    this.checkResponseError(response);
+    this.checkResponseError(request, response);
     const $ = cheerio.load(Application.arrayBufferToUTF8String(buffer));
 
     return this.parser.parseChapterList($, sourceManga, this);
@@ -306,7 +329,7 @@ export abstract class MangaStreamGeneric
 
     // const response = await this.requestManager.schedule(request, 1)
     const [response, buffer] = await Application.scheduleRequest(request);
-    this.checkResponseError(response);
+    this.checkResponseError(request, response);
     const $ = cheerio.load(Application.arrayBufferToUTF8String(buffer));
 
     //const chapter = $('div#chapterlist').find('li[data-num="' + chapterId + '"]')
@@ -341,7 +364,7 @@ export abstract class MangaStreamGeneric
 
     // const _response = await this.requestManager.schedule(_request, 1)
     const [_response, _buffer] = await Application.scheduleRequest(_request);
-    this.checkResponseError(_response);
+    this.checkResponseError(_request, _response);
     const _$ = cheerio.load(Application.arrayBufferToUTF8String(_buffer));
 
     return this.parser.parseChapterDetails(_$, chap);
@@ -362,7 +385,14 @@ export abstract class MangaStreamGeneric
     };
 
     const [response, buffer] = await Application.scheduleRequest(request);
-    this.checkResponseError(response);
+    // console.log("--------------------------")
+    // console.log("Cookies discover response");
+    // console.log(response.cookies.length)
+    // console.log(response.cookies.toString())
+    // console.log(this.cookieStorageInterceptor.cookies.length)
+    // console.log(this.cookieStorageInterceptor.cookies.toString());
+    // console.log("--------------------------")
+    this.checkResponseError(request, response);
     const $ = cheerio.load(Application.arrayBufferToUTF8String(buffer));
     let s: MangaStreamDiscoverSection;
     switch (section.id) {
@@ -386,25 +416,26 @@ export abstract class MangaStreamGeneric
   async saveCloudflareBypassCookies(cookies: Cookie[]): Promise<void> {
     this.count += 1;
     for (const cookie of cookies) {
+      if (cookie.expires && cookie.expires.getUTCMilliseconds() <= Date.now()) {
+        continue;
+      }
       if (
         cookie.name.startsWith("cf") ||
         cookie.name.startsWith("_cf") ||
         cookie.name.startsWith("__cf")
       ) {
         console.log("saving cloudflare cookie " + cookie.name);
+        console.log(cookie.expires);
         this.cookieStorageInterceptor.setCookie(cookie);
       }
     }
   }
 
-  checkResponseError(response: Response): void {
+  checkResponseError(request: Request, response: Response): void {
     switch (response.status) {
       case 403:
       case 503:
-        throw new CloudflareError(
-          { url: this.domain, method: "GET" },
-          "Error Code: " + response.status,
-        );
+        throw new CloudflareError(request, "Error Code: " + response.status);
       case 404:
         throw new Error(`The requested page ${response.url} was not found!`);
     }
@@ -472,7 +503,7 @@ export abstract class MangaStreamGeneric
     };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [headResponse, __] = await Application.scheduleRequest(headRequest);
-    this.checkResponseError(headResponse);
+    this.checkResponseError(headRequest, headResponse);
 
     let postId: string;
 

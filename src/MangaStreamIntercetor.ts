@@ -9,6 +9,10 @@ export class MangaStreamInterceptor extends PaperbackInterceptor {
   }
 
   override async interceptRequest(request: Request): Promise<Request> {
+    console.log("--------------------------");
+    console.log("Cookies ");
+    console.log(request.cookies);
+    console.log("--------------------------");
     request.headers = {
       ...(request.headers ?? {}),
       ...{
