@@ -1,0 +1,104 @@
+{
+  "buildTime": "2025-03-08T15:09:43.405Z",
+  "builtWith": {
+    "toolchain": "1.0.0-alpha.39",
+    "types": "1.0.0-alpha.39"
+  },
+  "repository": {
+    "name": "MangaStream Extensions (0.9)",
+    "description": "Paperback extensions for websites which use the generic MangaStream theme. Maintained by the Paperback Community."
+  },
+  "sources": [
+    {
+      "name": "Astra Scans",
+      "description": "Extension that pulls content from astrascans.org.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "MATURE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "AstraScans"
+    },
+    {
+      "name": "Asura Scans Free",
+      "description": "The asurascansfree.com extension.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "MATURE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "AsuraScansFree"
+    },
+    {
+      "name": "Lunar Scans",
+      "description": "Extension that pulls content from lunarscan.org.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "ADULT",
+      "badges": [
+        {
+          "label": "18+",
+          "textColor": "#000000",
+          "backgroundColor": "#FF0000"
+        }
+      ],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "LunarScans"
+    },
+    {
+      "name": "Night Scans",
+      "description": "Extension that pulls content from nightsup.net.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "MATURE",
+      "badges": [],
+      "capabilities": 101,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "NightScans"
+    },
+    {
+      "name": "Thunder Scans",
+      "description": "Extension that pulls content from en-thunderscans.com.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "MATURE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "Thunderscans"
+    }
+  ]
+}
