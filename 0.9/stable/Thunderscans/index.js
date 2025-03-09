@@ -17784,7 +17784,7 @@ var source = (() => {
   init_buffer();
   var import_types5 = __toESM(require_lib(), 1);
   var pbconfig_default = {
-    name: "Thunder Scans",
+    name: "Thunderscans",
     description: "Extension that pulls content from en-thunderscans.com.",
     version: "1.0.0-alpha.3",
     icon: "icon.png",

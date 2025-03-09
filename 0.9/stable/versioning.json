@@ -1,5 +1,5 @@
 {
-  "buildTime": "2025-03-09T21:01:49.292Z",
+  "buildTime": "2025-03-09T21:09:36.341Z",
   "builtWith": {
     "toolchain": "1.0.0-alpha.39",
     "types": "1.0.0-alpha.39"
@@ -84,7 +84,7 @@
       "id": "NightScans"
     },
     {
-      "name": "Thunder Scans",
+      "name": "Thunderscans",
       "description": "Extension that pulls content from en-thunderscans.com.",
       "version": "1.0.0-alpha.3",
       "icon": "icon.png",
