@@ -17786,7 +17786,7 @@ var source = (() => {
   var pbconfig_default = {
     name: "Astra Scans",
     description: "Extension that pulls content from astrascans.org.",
-    version: "1.0.0-alpha.1",
+    version: "1.0.0-alpha.2",
     icon: "icon.png",
     language: "en",
     contentRating: import_types5.ContentRating.MATURE,

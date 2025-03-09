@@ -17786,7 +17786,7 @@ var source = (() => {
   var pbconfig_default = {
     name: "Asura Scans Free",
     description: "The asurascansfree.com extension.",
-    version: "1.0.0-alpha.1",
+    version: "1.0.0-alpha.2",
     icon: "icon.png",
     language: "en",
     contentRating: import_types5.ContentRating.MATURE,

@@ -17786,7 +17786,7 @@ var source = (() => {
   var pbconfig_default = {
     name: "Thunder Scans",
     description: "Extension that pulls content from en-thunderscans.com.",
-    version: "1.0.0-alpha.1",
+    version: "1.0.0-alpha.3",
     icon: "icon.png",
     language: "en",
     contentRating: import_types5.ContentRating.MATURE,
