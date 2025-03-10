@@ -17670,14 +17670,10 @@ var source = (() => {
     }
     async saveCloudflareBypassCookies(cookies) {
       for (const cookie of cookies) {
-        if (cookie.expires && cookie.expires.getUTCMilliseconds() <= Date.now()) {
+        if (cookie.expires && cookie.expires.getTime() <= Date.now()) {
           continue;
         }
-        if (cookie.name.startsWith("cf") || cookie.name.startsWith("_cf") || cookie.name.startsWith("__cf")) {
-          console.log("saving cloudflare cookie " + cookie.name);
-          console.log(cookie.expires);
-          this.cookieStorageInterceptor.setCookie(cookie);
-        }
+        this.cookieStorageInterceptor.setCookie(cookie);
       }
     }
     checkResponseError(request, response) {
@@ -17786,7 +17782,7 @@ var source = (() => {
   var pbconfig_default = {
     name: "Lunar Scans",
     description: "Extension that pulls content from lunarscan.org.",
-    version: "1.0.0-alpha.2",
+    version: "1.0.0-alpha.3",
     icon: "icon.png",
     language: "en",
     contentRating: import_types5.ContentRating.ADULT,

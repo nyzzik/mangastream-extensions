@@ -17670,14 +17670,10 @@ var source = (() => {
     }
     async saveCloudflareBypassCookies(cookies) {
       for (const cookie of cookies) {
-        if (cookie.expires && cookie.expires.getUTCMilliseconds() <= Date.now()) {
+        if (cookie.expires && cookie.expires.getTime() <= Date.now()) {
           continue;
         }
-        if (cookie.name.startsWith("cf") || cookie.name.startsWith("_cf") || cookie.name.startsWith("__cf")) {
-          console.log("saving cloudflare cookie " + cookie.name);
-          console.log(cookie.expires);
-          this.cookieStorageInterceptor.setCookie(cookie);
-        }
+        this.cookieStorageInterceptor.setCookie(cookie);
       }
     }
     checkResponseError(request, response) {
@@ -17786,7 +17782,7 @@ var source = (() => {
   var pbconfig_default = {
     name: "Astra Scans",
     description: "Extension that pulls content from astrascans.org.",
-    version: "1.0.0-alpha.2",
+    version: "1.0.0-alpha.4",
     icon: "icon.png",
     language: "en",
     contentRating: import_types5.ContentRating.MATURE,
@@ -17805,6 +17801,9 @@ var source = (() => {
   var AstraScansExt = class extends MangaStreamGeneric {
     domain = DOMAIN_NAME;
     name = pbconfig_default.name;
+    configureSections() {
+      this.latestUpdatesSection.selectorFunc = ($2) => $2("div.bsx", $2("h2:contains(Latest Update)")?.parent()?.next());
+    }
   };
   var AstraScans = new AstraScansExt();
   return __toCommonJS(main_exports);
