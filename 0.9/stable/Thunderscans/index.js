@@ -17670,7 +17670,14 @@ var source = (() => {
     }
     async saveCloudflareBypassCookies(cookies) {
       for (const cookie of cookies) {
-        this.cookieStorageInterceptor.setCookie(cookie);
+        if (cookie.expires && cookie.expires.getUTCMilliseconds() <= Date.now()) {
+          continue;
+        }
+        if (cookie.name.startsWith("cf") || cookie.name.startsWith("_cf") || cookie.name.startsWith("__cf")) {
+          console.log("saving cloudflare cookie " + cookie.name);
+          console.log(cookie.expires);
+          this.cookieStorageInterceptor.setCookie(cookie);
+        }
       }
     }
     checkResponseError(request, response) {
@@ -17779,7 +17786,7 @@ var source = (() => {
   var pbconfig_default = {
     name: "Thunderscans",
     description: "Extension that pulls content from en-thunderscans.com.",
-    version: "1.0.0-alpha.4",
+    version: "1.0.0-alpha.3",
     icon: "icon.png",
     language: "en",
     contentRating: import_types5.ContentRating.MATURE,
