@@ -17669,6 +17669,9 @@ var source = (() => {
       return new MangaStreamSettings(this.name);
     }
     async saveCloudflareBypassCookies(cookies) {
+      for (const cookie of this.cookieStorageInterceptor.cookies) {
+        this.cookieStorageInterceptor.deleteCookie(cookie);
+      }
       for (const cookie of cookies) {
         if (cookie.expires && cookie.expires.getTime() <= Date.now()) {
           continue;

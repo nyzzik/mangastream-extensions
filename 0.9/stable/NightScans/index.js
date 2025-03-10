@@ -17669,6 +17669,9 @@ var source = (() => {
       return new MangaStreamSettings(this.name);
     }
     async saveCloudflareBypassCookies(cookies) {
+      for (const cookie of this.cookieStorageInterceptor.cookies) {
+        this.cookieStorageInterceptor.deleteCookie(cookie);
+      }
       for (const cookie of cookies) {
         if (cookie.expires && cookie.expires.getTime() <= Date.now()) {
           continue;
@@ -17785,7 +17788,7 @@ var source = (() => {
     version: "1.0.0-alpha.3",
     icon: "icon.png",
     language: "en",
-    contentRating: import_types5.ContentRating.MATURE,
+    contentRating: import_types5.ContentRating.EVERYONE,
     badges: [],
     capabilities: import_types5.SourceIntents.MANGA_CHAPTERS | import_types5.SourceIntents.DISCOVER_SECIONS | import_types5.SourceIntents.SETTINGS_UI | import_types5.SourceIntents.MANGA_SEARCH,
     developers: [

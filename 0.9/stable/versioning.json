@@ -1,5 +1,5 @@
 {
-  "buildTime": "2025-03-10T02:03:38.981Z",
+  "buildTime": "2025-03-10T16:02:52.226Z",
   "builtWith": {
     "toolchain": "1.0.0-alpha.39",
     "types": "1.0.0-alpha.39"
@@ -12,10 +12,10 @@
     {
       "name": "Astra Scans",
       "description": "Extension that pulls content from astrascans.org.",
-      "version": "1.0.0-alpha.4",
+      "version": "1.0.0-alpha.3",
       "icon": "icon.png",
       "language": "en",
-      "contentRating": "MATURE",
+      "contentRating": "SAFE",
       "badges": [],
       "capabilities": 117,
       "developers": [
@@ -32,7 +32,7 @@
       "version": "1.0.0-alpha.3",
       "icon": "icon.png",
       "language": "en",
-      "contentRating": "MATURE",
+      "contentRating": "SAFE",
       "badges": [],
       "capabilities": 117,
       "developers": [
@@ -72,7 +72,7 @@
       "version": "1.0.0-alpha.3",
       "icon": "icon.png",
       "language": "en",
-      "contentRating": "MATURE",
+      "contentRating": "SAFE",
       "badges": [],
       "capabilities": 101,
       "developers": [
@@ -89,7 +89,7 @@
       "version": "1.0.0-alpha.4",
       "icon": "icon.png",
       "language": "en",
-      "contentRating": "MATURE",
+      "contentRating": "SAFE",
       "badges": [],
       "capabilities": 117,
       "developers": [
