@@ -16949,7 +16949,7 @@ var source = (() => {
     });
   }
 
-  // src/generic/MangaStreamIntercetor.ts
+  // src/generic/MangaStreamInterceptor.ts
   init_buffer();
   var import_types2 = __toESM(require_lib(), 1);
   var MangaStreamInterceptor = class extends import_types2.PaperbackInterceptor {
@@ -17494,10 +17494,9 @@ var source = (() => {
       storage: "stateManager"
     });
     async initialise() {
-      this.cookieStorageInterceptor.registerInterceptor();
       this.globalRateLimiter.registerInterceptor();
+      this.cookieStorageInterceptor.registerInterceptor();
       this.requestManager?.registerInterceptor();
-      if (Application.isResourceLimited) return;
     }
     async getSearchTags() {
       let tags = Application.getState("tags");
