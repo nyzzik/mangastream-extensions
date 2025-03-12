@@ -1,5 +1,5 @@
 {
-  "buildTime": "2025-03-12T15:22:16.773Z",
+  "buildTime": "2025-03-12T23:15:11.584Z",
   "builtWith": {
     "toolchain": "1.0.0-alpha.39",
     "types": "1.0.0-alpha.39"
@@ -9,6 +9,40 @@
     "description": "Paperback extensions for websites which use the generic MangaStream theme. Maintained by the Paperback Community."
   },
   "sources": [
+    {
+      "name": "Astra Scans",
+      "description": "Extension that pulls content from astrascans.org.",
+      "version": "1.0.0-alpha.4",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "AstraScans"
+    },
+    {
+      "name": "Asura Scans Free",
+      "description": "The asurascansfree.com extension.",
+      "version": "1.0.0-alpha.3",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "AsuraScansFree"
+    },
     {
       "name": "Lunar Scans",
       "description": "Extension that pulls content from lunarscan.org.",
@@ -31,6 +65,40 @@
         }
       ],
       "id": "LunarScans"
+    },
+    {
+      "name": "Night Scans",
+      "description": "Extension that pulls content from nightsup.net.",
+      "version": "1.0.0-alpha.3",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 101,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "NightScans"
+    },
+    {
+      "name": "Thunderscans",
+      "description": "Extension that pulls content from en-thunderscans.com.",
+      "version": "1.0.0-alpha.5",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "Thunderscans"
     }
   ]
 }
