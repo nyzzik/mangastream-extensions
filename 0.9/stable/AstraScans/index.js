@@ -3029,10 +3029,10 @@ var source = (() => {
     }
   });
 
-  // src/LunarScans/main.ts
+  // src/AstraScans/main.ts
   var main_exports = {};
   __export(main_exports, {
-    LunarScans: () => LunarScans
+    AstraScans: () => AstraScans
   });
   init_buffer();
 
@@ -17778,19 +17778,17 @@ var source = (() => {
     }
   };
 
-  // src/LunarScans/pbconfig.ts
+  // src/AstraScans/pbconfig.ts
   init_buffer();
   var import_types5 = __toESM(require_lib(), 1);
   var pbconfig_default = {
-    name: "Lunar Scans",
-    description: "Extension that pulls content from lunarscan.org.",
-    version: "1.0.0-alpha.3",
+    name: "Astra Scans",
+    description: "Extension that pulls content from astrascans.org.",
+    version: "1.0.0-alpha.4",
     icon: "icon.png",
     language: "en",
-    contentRating: import_types5.ContentRating.ADULT,
-    badges: [
-      { label: "18+", textColor: "#000000", backgroundColor: "#FF0000" }
-    ],
+    contentRating: import_types5.ContentRating.EVERYONE,
+    badges: [],
     capabilities: import_types5.SourceIntents.MANGA_CHAPTERS | import_types5.SourceIntents.DISCOVER_SECIONS | import_types5.SourceIntents.SETTINGS_UI | import_types5.SourceIntents.MANGA_SEARCH | import_types5.SourceIntents.CLOUDFLARE_BYPASS_REQUIRED,
     developers: [
       {
@@ -17800,15 +17798,17 @@ var source = (() => {
     ]
   };
 
-  // src/LunarScans/main.ts
-  var DOMAIN_NAME = "https://lunarscan.org/";
-  var LunarScansExt = class extends MangaStreamGeneric {
+  // src/AstraScans/main.ts
+  var DOMAIN_NAME = "https://astrascans.org";
+  var AstraScansExt = class extends MangaStreamGeneric {
     domain = DOMAIN_NAME;
     name = pbconfig_default.name;
     directoryPath = "series";
-    defaultContentRating = pbconfig_default.contentRating;
+    configureSections() {
+      this.latestUpdatesSection.selectorFunc = ($2) => $2("div.bsx", $2("h2:contains(Latest Update)")?.parent()?.next());
+    }
   };
-  var LunarScans = new LunarScansExt();
+  var AstraScans = new AstraScansExt();
   return __toCommonJS(main_exports);
 })();
 /*! Bundled license information:

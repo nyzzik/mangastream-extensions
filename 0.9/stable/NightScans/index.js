@@ -3029,10 +3029,10 @@ var source = (() => {
     }
   });
 
-  // src/LunarScans/main.ts
+  // src/NightScans/main.ts
   var main_exports = {};
   __export(main_exports, {
-    LunarScans: () => LunarScans
+    NightScans: () => NightScans
   });
   init_buffer();
 
@@ -17778,20 +17778,18 @@ var source = (() => {
     }
   };
 
-  // src/LunarScans/pbconfig.ts
+  // src/NightScans/pbconfig.ts
   init_buffer();
   var import_types5 = __toESM(require_lib(), 1);
   var pbconfig_default = {
-    name: "Lunar Scans",
-    description: "Extension that pulls content from lunarscan.org.",
+    name: "Night Scans",
+    description: "Extension that pulls content from nightsup.net.",
     version: "1.0.0-alpha.3",
     icon: "icon.png",
     language: "en",
-    contentRating: import_types5.ContentRating.ADULT,
-    badges: [
-      { label: "18+", textColor: "#000000", backgroundColor: "#FF0000" }
-    ],
-    capabilities: import_types5.SourceIntents.MANGA_CHAPTERS | import_types5.SourceIntents.DISCOVER_SECIONS | import_types5.SourceIntents.SETTINGS_UI | import_types5.SourceIntents.MANGA_SEARCH | import_types5.SourceIntents.CLOUDFLARE_BYPASS_REQUIRED,
+    contentRating: import_types5.ContentRating.EVERYONE,
+    badges: [],
+    capabilities: import_types5.SourceIntents.MANGA_CHAPTERS | import_types5.SourceIntents.DISCOVER_SECIONS | import_types5.SourceIntents.SETTINGS_UI | import_types5.SourceIntents.MANGA_SEARCH,
     developers: [
       {
         name: "nyzzik",
@@ -17800,15 +17798,17 @@ var source = (() => {
     ]
   };
 
-  // src/LunarScans/main.ts
-  var DOMAIN_NAME = "https://lunarscan.org/";
-  var LunarScansExt = class extends MangaStreamGeneric {
-    domain = DOMAIN_NAME;
+  // src/NightScans/main.ts
+  var DOMAIN_NAME = "https://nightsup.net";
+  var NightScansExt = class extends MangaStreamGeneric {
     name = pbconfig_default.name;
-    directoryPath = "series";
-    defaultContentRating = pbconfig_default.contentRating;
+    domain = DOMAIN_NAME;
+    configureSections() {
+      this.latestUpdatesSection.selectorFunc = ($2) => $2("div.bsx", $2("h2:contains(Latest Update)").parent().next());
+      this.latestUpdatesSection.subtitleSelectorFunc = ($2, element) => $2(element).find("a.maincl").first().text().trim();
+    }
   };
-  var LunarScans = new LunarScansExt();
+  var NightScans = new NightScansExt();
   return __toCommonJS(main_exports);
 })();
 /*! Bundled license information:
