@@ -17185,7 +17185,8 @@ var source = (() => {
         );
       }
       return chapters.map((chapter) => {
-        if (chapter.sortingIndex) chapter.sortingIndex += chapters.length;
+        if (chapter.sortingIndex != void 0)
+          chapter.sortingIndex += chapters.length;
         return chapter;
       });
     }
