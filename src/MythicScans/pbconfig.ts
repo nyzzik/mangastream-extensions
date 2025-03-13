@@ -1,21 +1,18 @@
 import { ContentRating, SourceInfo, SourceIntents } from "@paperback/types";
 
 export default {
-    name: "Lunar Scans",
-    description: "Extension that pulls content from lunarscan.org.",
-    version: "1.0.0-alpha.4",
+    name: "Mythic Scans",
+    description: "Extension that pulls content from mythicscans.net.",
+    version: "1.0.0-alpha.1",
     icon: "icon.png",
     language: "en",
-    contentRating: ContentRating.ADULT,
-    badges: [
-        { label: "18+", textColor: "#000000", backgroundColor: "#FF0000" },
-    ],
+    contentRating: ContentRating.EVERYONE,
+    badges: [],
     capabilities:
         SourceIntents.MANGA_CHAPTERS |
         SourceIntents.DISCOVER_SECIONS |
         SourceIntents.SETTINGS_UI |
-        SourceIntents.MANGA_SEARCH |
-        SourceIntents.CLOUDFLARE_BYPASS_REQUIRED,
+        SourceIntents.MANGA_SEARCH,
     developers: [
         {
             name: "nyzzik",

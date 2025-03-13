@@ -4,14 +4,12 @@ import { MangaStreamGeneric } from "../generic/MangaStream";
 import config from "./pbconfig";
 import pbconfig from "./pbconfig";
 
-const DOMAIN_NAME: string = "https://astrascans.org";
+const DOMAIN_NAME: string = "https://manhuaga.com/";
 
-class AstraScansExt extends MangaStreamGeneric {
+class IgnisComicExt extends MangaStreamGeneric {
     domain = DOMAIN_NAME;
     name = config.name;
     contentRating: ContentRating = pbconfig.contentRating;
-
-    override directoryPath: string = "series";
 
     override configureSections(): void {
         this.latestUpdatesSection.selectorFunc = ($: CheerioAPI) =>
@@ -19,4 +17,4 @@ class AstraScansExt extends MangaStreamGeneric {
     }
 }
 
-export const AstraScans = new AstraScansExt();
+export const IgnisComic = new IgnisComicExt();

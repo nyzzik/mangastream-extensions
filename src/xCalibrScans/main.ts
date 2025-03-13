@@ -3,14 +3,12 @@ import { MangaStreamGeneric } from "../generic/MangaStream";
 import config from "./pbconfig";
 import pbconfig from "./pbconfig";
 
-const DOMAIN_NAME: string = "https://lunarscan.org/";
+const DOMAIN_NAME = "https://xcalibrscans.com";
 
-class LunarScansExt extends MangaStreamGeneric {
-    domain = DOMAIN_NAME;
-    name = config.name;
+class xCalibrScansExt extends MangaStreamGeneric {
+    name: string = config.name;
+    domain: string = DOMAIN_NAME;
     contentRating: ContentRating = pbconfig.contentRating;
-
-    override directoryPath = "series";
 }
 
-export const LunarScans = new LunarScansExt();
+export const xCalibrScans = new xCalibrScansExt();

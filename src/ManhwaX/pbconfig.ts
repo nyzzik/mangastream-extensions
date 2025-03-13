@@ -1,10 +1,10 @@
 import { ContentRating, SourceInfo, SourceIntents } from "@paperback/types";
 
 export default {
-    name: "Lunar Scans",
-    description: "Extension that pulls content from lunarscan.org.",
-    version: "1.0.0-alpha.4",
-    icon: "icon.png",
+    name: "ManhwaX",
+    description: "Extension that pulls content from manhwax.top.",
+    version: "1.0.0-alpha.1",
+    icon: "icon.jpg",
     language: "en",
     contentRating: ContentRating.ADULT,
     badges: [

@@ -108,7 +108,7 @@ export class MangaStreamParser {
                 author: author == "" ? "Unknown" : author,
                 artist: artist == "" ? "Unknown" : artist,
                 synopsis: description,
-                contentRating: source.defaultContentRating,
+                contentRating: source.contentRating,
                 tagGroups: tagSections,
             },
         };
@@ -140,7 +140,7 @@ export class MangaStreamParser {
                 source,
             );
             // Set data-num attribute as id
-            const id = chapter.attribs["data-num"] ?? "";
+            const id = (chapter.attribs["data-num"] ?? "").replaceAll(" ", "-");
             const chapterNumberRegex = id.match(/(\d+\.?\d?)+/);
             let chapterNumber = 0;
             if (chapterNumberRegex && chapterNumberRegex[1]) {

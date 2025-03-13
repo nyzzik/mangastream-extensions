@@ -51,4 +51,5 @@ export interface MangaStreamDiscoverSection extends DiscoverSection {
         | "prominentCarouselItem"
         | "chapterUpdatesCarouselItem"
         | "genresCarouselItem";
+    enabled: boolean;
 }

@@ -45,6 +45,8 @@ import {
 import { MangaStreamParser } from "./MangaStreamParser";
 import { getUsePostIds, MangaStreamSettings } from "./MangaStreamSettingsForm";
 
+const BASE_VERSION = "1.0.0";
+
 export abstract class MangaStreamGeneric
     implements
         Extension,
@@ -57,8 +59,8 @@ export abstract class MangaStreamGeneric
 {
     abstract domain: string;
     abstract name: string;
+    abstract contentRating: ContentRating;
     directoryPath: string = "manga";
-    defaultContentRating: ContentRating = ContentRating.MATURE;
 
     parser: MangaStreamParser = new MangaStreamParser();
 
@@ -108,6 +110,7 @@ export abstract class MangaStreamGeneric
             element: cheerio.BasicAcceptedElems<AnyNode>,
         ) => $("div.epxs", element).first().text().trim(),
         itemType: "featuredCarouselItem",
+        enabled: true,
     };
 
     latestUpdatesSection: MangaStreamDiscoverSection = {
@@ -129,6 +132,7 @@ export abstract class MangaStreamGeneric
                 .text()
                 .trim(),
         itemType: "chapterUpdatesCarouselItem",
+        enabled: true,
     };
 
     discoverSections: MangaStreamDiscoverSection[] = [
@@ -363,14 +367,16 @@ export abstract class MangaStreamGeneric
     }
 
     async getDiscoverSections(): Promise<DiscoverSection[]> {
-        return this.discoverSections.map((x: MangaStreamDiscoverSection) => {
-            return {
-                id: x.id,
-                subtitle: x.subtitle,
-                type: x.type,
-                title: x.title,
-            };
-        });
+        return this.discoverSections
+            .filter((x: MangaStreamDiscoverSection) => x.enabled)
+            .map((x: MangaStreamDiscoverSection) => {
+                return {
+                    id: x.id,
+                    subtitle: x.subtitle,
+                    type: x.type,
+                    title: x.title,
+                };
+            });
     }
 
     async getDiscoverSectionItems(
@@ -549,3 +555,21 @@ export abstract class MangaStreamGeneric
 
     configureSections(): void {}
 }
+export const getExportVersion = (EXTENSION_VERSION: string): string => {
+    const baseParts = BASE_VERSION.split("-");
+    const extParts = EXTENSION_VERSION.split("-");
+
+    const baseVersionNumbers = baseParts[0].split(".").map(Number);
+    const extVersionNumbers = extParts[0].split(".").map(Number);
+
+    const newVersionNumbers = baseVersionNumbers.map(
+        (num, index) => (extVersionNumbers[index] || 0) + num,
+    );
+
+    const baseSuffix = baseParts[1] ? `-${baseParts.slice(1).join("-")}` : "";
+    const extSuffix = extParts[1] ? `-${extParts.slice(1).join("-")}` : "";
+
+    const finalSuffix = baseSuffix || extSuffix;
+
+    return `${newVersionNumbers.join(".")}${finalSuffix}`;
+};

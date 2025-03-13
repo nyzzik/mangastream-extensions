@@ -1,14 +1,16 @@
+import { ContentRating } from "@paperback/types";
 import { BasicAcceptedElems, CheerioAPI } from "cheerio";
 import { AnyNode } from "domhandler";
 import { MangaStreamGeneric } from "../generic/MangaStream";
 import config from "./pbconfig";
+import pbconfig from "./pbconfig";
 
 const DOMAIN_NAME = "https://en-thunderscans.com";
 
 class ThunderscansExt extends MangaStreamGeneric {
     name: string = config.name;
-
     domain: string = DOMAIN_NAME;
+    contentRating: ContentRating = pbconfig.contentRating;
 
     override directoryPath: string = "comics";
 

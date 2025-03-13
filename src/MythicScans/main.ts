@@ -1,13 +1,12 @@
 import { ContentRating } from "@paperback/types";
-import { BasicAcceptedElems, CheerioAPI } from "cheerio";
-import { AnyNode } from "domhandler";
+import { CheerioAPI } from "cheerio";
 import { MangaStreamGeneric } from "../generic/MangaStream";
 import config from "./pbconfig";
 import pbconfig from "./pbconfig";
 
-const DOMAIN_NAME = "https://nightsup.net";
+const DOMAIN_NAME = "https://mythicscans.net/";
 
-class NightScansExt extends MangaStreamGeneric {
+class MythicScansExt extends MangaStreamGeneric {
     name: string = config.name;
     domain: string = DOMAIN_NAME;
     contentRating: ContentRating = pbconfig.contentRating;
@@ -15,11 +14,7 @@ class NightScansExt extends MangaStreamGeneric {
     override configureSections() {
         this.latestUpdatesSection.selectorFunc = ($: CheerioAPI) =>
             $("div.bsx", $("h2:contains(Latest Update)").parent().next());
-        this.latestUpdatesSection.subtitleSelectorFunc = (
-            $: CheerioAPI,
-            element: BasicAcceptedElems<AnyNode>,
-        ): string => $(element).find("a.maincl").first().text().trim();
     }
 }
 
-export const NightScans = new NightScansExt();
+export const MythicScans = new MythicScansExt();
