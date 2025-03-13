@@ -1,0 +1,1 @@
+{"name":"ManhwaX","description":"Extension that pulls content from manhwax.top.","version":"1.0.0-alpha.1","icon":"icon.jpg","language":"en","contentRating":"ADULT","badges":[{"label":"18+","textColor":"#000000","backgroundColor":"#FF0000"}],"capabilities":117,"developers":[{"name":"nyzzik","github":"https://github.com/nyzzik"}],"id":"ManhwaX"}

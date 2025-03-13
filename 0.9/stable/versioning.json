@@ -1,5 +1,5 @@
 {
-  "buildTime": "2025-03-12T23:25:41.211Z",
+  "buildTime": "2025-03-13T00:41:54.722Z",
   "builtWith": {
     "toolchain": "1.0.0-alpha.39",
     "types": "1.0.0-alpha.39"
@@ -12,7 +12,7 @@
     {
       "name": "Astra Scans",
       "description": "Extension that pulls content from astrascans.org.",
-      "version": "1.0.0-alpha.4",
+      "version": "1.0.0-alpha.5",
       "icon": "icon.png",
       "language": "en",
       "contentRating": "SAFE",
@@ -29,7 +29,7 @@
     {
       "name": "Asura Scans Free",
       "description": "The asurascansfree.com extension.",
-      "version": "1.0.0-alpha.3",
+      "version": "1.0.0-alpha.4",
       "icon": "icon.png",
       "language": "en",
       "contentRating": "SAFE",
@@ -44,9 +44,111 @@
       "id": "AsuraScansFree"
     },
     {
+      "name": "Cypher Scans",
+      "description": "The cypheroscans.xyz extension.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "CypherScans"
+    },
+    {
+      "name": "Drake Scans",
+      "description": "The drakecomic.org extension.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "DrakeScans"
+    },
+    {
+      "name": "Elarc Toons",
+      "description": "The elarctoons.biz extension.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "ElarcToons"
+    },
+    {
+      "name": "Hentai20",
+      "description": "The hentai20.io extension.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.jpg",
+      "language": "en",
+      "contentRating": "ADULT",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "Hentai20"
+    },
+    {
+      "name": "Ignis Comic",
+      "description": "Extension that pulls content from manhuaga.com.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "IgnisComic"
+    },
+    {
+      "name": "LelManga",
+      "description": "The lelmanga.com extension.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "fr",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "LelManga"
+    },
+    {
       "name": "Lunar Scans",
       "description": "Extension that pulls content from lunarscan.org.",
-      "version": "1.0.0-alpha.3",
+      "version": "1.0.0-alpha.4",
       "icon": "icon.png",
       "language": "en",
       "contentRating": "ADULT",
@@ -67,9 +169,49 @@
       "id": "LunarScans"
     },
     {
+      "name": "ManhwaX",
+      "description": "Extension that pulls content from manhwax.top.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.jpg",
+      "language": "en",
+      "contentRating": "ADULT",
+      "badges": [
+        {
+          "label": "18+",
+          "textColor": "#000000",
+          "backgroundColor": "#FF0000"
+        }
+      ],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "ManhwaX"
+    },
+    {
+      "name": "Mythic Scans",
+      "description": "Extension that pulls content from mythicscans.net.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 101,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "MythicScans"
+    },
+    {
       "name": "Night Scans",
       "description": "Extension that pulls content from nightsup.net.",
-      "version": "1.0.0-alpha.3",
+      "version": "1.0.0-alpha.4",
       "icon": "icon.png",
       "language": "en",
       "contentRating": "SAFE",
@@ -84,9 +226,43 @@
       "id": "NightScans"
     },
     {
+      "name": "RawKuma",
+      "description": "Extension that pulls content from rawkuma.com.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "RawKuma"
+    },
+    {
+      "name": "SushiScans",
+      "description": "Extension that pulls content from sushiscan.net.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "SushiScans"
+    },
+    {
       "name": "Thunderscans",
       "description": "Extension that pulls content from en-thunderscans.com.",
-      "version": "1.0.0-alpha.5",
+      "version": "1.0.0-alpha.6",
       "icon": "icon.png",
       "language": "en",
       "contentRating": "SAFE",
@@ -99,6 +275,23 @@
         }
       ],
       "id": "Thunderscans"
+    },
+    {
+      "name": "xCalibrScans",
+      "description": "Extension that pulls content from xcalibrscans.com.",
+      "version": "1.0.0-alpha.1",
+      "icon": "icon.png",
+      "language": "en",
+      "contentRating": "SAFE",
+      "badges": [],
+      "capabilities": 117,
+      "developers": [
+        {
+          "name": "nyzzik",
+          "github": "https://github.com/nyzzik"
+        }
+      ],
+      "id": "xCalibrScans"
     }
   ]
 }
