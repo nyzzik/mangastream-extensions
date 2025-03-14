@@ -1,1 +1,1 @@
-{"name":"Drake Scans","description":"The drakecomic.org extension.","version":"1.0.0-alpha.1","icon":"icon.png","language":"en","contentRating":"SAFE","badges":[],"capabilities":117,"developers":[{"name":"nyzzik","github":"https://github.com/nyzzik"}],"id":"DrakeScans"}
+{"name":"Drake Scans","description":"Extension that pulls content from drakecomic.org.","version":"1.0.0-alpha.1","icon":"icon.png","language":"en","contentRating":"SAFE","badges":[],"capabilities":117,"developers":[{"name":"nyzzik","github":"https://github.com/nyzzik"}],"id":"DrakeScans"}

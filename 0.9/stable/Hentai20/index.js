@@ -17785,7 +17785,7 @@ var source = (() => {
   var import_types5 = __toESM(require_lib(), 1);
   var pbconfig_default = {
     name: "Hentai20",
-    description: "The hentai20.io extension.",
+    description: "Extension that pulls content from hentai20.io.",
     version: "1.0.0-alpha.1",
     icon: "icon.jpg",
     language: "en",

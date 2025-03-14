@@ -1,5 +1,5 @@
 {
-  "buildTime": "2025-03-13T00:41:54.722Z",
+  "buildTime": "2025-03-14T13:05:38.805Z",
   "builtWith": {
     "toolchain": "1.0.0-alpha.39",
     "types": "1.0.0-alpha.39"
@@ -45,7 +45,7 @@
     },
     {
       "name": "Cypher Scans",
-      "description": "The cypheroscans.xyz extension.",
+      "description": "Extension that pulls content from cypheroscans.xyz.",
       "version": "1.0.0-alpha.1",
       "icon": "icon.png",
       "language": "en",
@@ -62,7 +62,7 @@
     },
     {
       "name": "Drake Scans",
-      "description": "The drakecomic.org extension.",
+      "description": "Extension that pulls content from drakecomic.org.",
       "version": "1.0.0-alpha.1",
       "icon": "icon.png",
       "language": "en",
@@ -79,7 +79,7 @@
     },
     {
       "name": "Elarc Toons",
-      "description": "The elarctoons.biz extension.",
+      "description": "Extension that pulls content from elarctoons.biz.",
       "version": "1.0.0-alpha.1",
       "icon": "icon.png",
       "language": "en",
@@ -96,7 +96,7 @@
     },
     {
       "name": "Hentai20",
-      "description": "The hentai20.io extension.",
+      "description": "Extension that pulls content from hentai20.io.",
       "version": "1.0.0-alpha.1",
       "icon": "icon.jpg",
       "language": "en",
@@ -130,7 +130,7 @@
     },
     {
       "name": "LelManga",
-      "description": "The lelmanga.com extension.",
+      "description": "Extension that pulls content from lelmanga.com.",
       "version": "1.0.0-alpha.1",
       "icon": "icon.png",
       "language": "fr",

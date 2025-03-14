@@ -17785,7 +17785,7 @@ var source = (() => {
   var import_types5 = __toESM(require_lib(), 1);
   var pbconfig_default = {
     name: "LelManga",
-    description: "The lelmanga.com extension.",
+    description: "Extension that pulls content from lelmanga.com.",
     version: "1.0.0-alpha.1",
     icon: "icon.png",
     language: "fr",

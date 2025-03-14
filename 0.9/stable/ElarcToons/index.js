@@ -17785,7 +17785,7 @@ var source = (() => {
   var import_types5 = __toESM(require_lib(), 1);
   var pbconfig_default = {
     name: "Elarc Toons",
-    description: "The elarctoons.biz extension.",
+    description: "Extension that pulls content from elarctoons.biz.",
     version: "1.0.0-alpha.1",
     icon: "icon.png",
     language: "en",
