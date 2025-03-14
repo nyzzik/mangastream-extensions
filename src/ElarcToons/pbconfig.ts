@@ -2,7 +2,7 @@ import { ContentRating, SourceInfo, SourceIntents } from "@paperback/types";
 
 export default {
     name: "Elarc Toons",
-    description: "The elarctoons.biz extension.",
+    description: "Extension that pulls content from elarctoons.biz.",
     version: "1.0.0-alpha.1",
     icon: "icon.png",
     language: "en",

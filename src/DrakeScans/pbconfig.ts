@@ -2,7 +2,7 @@ import { ContentRating, SourceInfo, SourceIntents } from "@paperback/types";
 
 export default {
     name: "Drake Scans",
-    description: "The drakecomic.org extension.",
+    description: "Extension that pulls content from drakecomic.org.",
     version: "1.0.0-alpha.1",
     icon: "icon.png",
     language: "en",

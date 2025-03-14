@@ -2,7 +2,7 @@ import { ContentRating, SourceInfo, SourceIntents } from "@paperback/types";
 
 export default {
     name: "Cypher Scans",
-    description: "The cypheroscans.xyz extension.",
+    description: "Extension that pulls content from cypheroscans.xyz.",
     version: "1.0.0-alpha.1",
     icon: "icon.png",
     language: "en",
